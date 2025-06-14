@@ -55,6 +55,7 @@ const User1 = () => {
 
       const data = await res.json();
       setToken(data.token);
+      
       setActiveTab("Dashboard");
 
       await fetch(`${BACKEND_URL}/attendance/login`, {
@@ -163,6 +164,7 @@ const User1 = () => {
             </aside>
 
             <main className={styles.main}>
+             {/* {console.log(token)} */}
               {/* 🔁 Continuous location tracking every 30s */}
               <LocationTracker token={token} socketRef={socketRef} />
               {renderContent()}

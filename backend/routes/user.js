@@ -242,5 +242,59 @@ const presentDays = presentDaysAgg[0]?.uniqueDays || 0;
 });
 
 
+async function fetchWithRetry(url, options = {}, retries = 1, timeoutMs = 8000) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+      return response;
+    } catch (err) {
+      clearTimeout(timeout);
+      if (err.name === 'AbortError') {
+        console.warn(`🕒 Timeout on attempt ${attempt + 1}`);
+        if (attempt === retries) throw err;
+      } else {
+        throw err;
+      }
+    }
+  }
+}
+
+router.get('/reverse-geocode', authenticate, async (req, res) => {
+  const { lat, lon } = req.query;
+  if (!lat || !lon) {
+    return res.status(400).json({ error: 'Latitude and longitude required' });
+  }
+
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
+
+  try {
+    const response = await fetchWithRetry(url, {
+      headers: {
+        'User-Agent': 'EmpTracker/1.0 (praveen@example.com)', // Replace with real contact
+      },
+    }, 1, 8000); // 1 retry, 8s timeout
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error('❌ Nominatim responded with error:', text);
+      return res.status(response.status).json({ error: 'Failed to reverse geocode' });
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.error('❌ Error in reverse geocode route:', err);
+    res.status(500).json({ error: 'Geocoding failed' });
+  }
+});
+
+
+
 
 module.exports = router;

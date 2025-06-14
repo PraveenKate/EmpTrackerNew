@@ -14,6 +14,7 @@ const User = require('./models/User');
 const attendanceRoutes = require('./routes/attendance');
 const Distance= require('./models/Distance')
 const path = require('path');
+const fetch = require('node-fetch');
 require('./jobs/distanceCron');
 
 const app = express();
@@ -176,7 +177,7 @@ socket.on('send-location', async ({ lat, lng, address }) => {
       // --- Fetch total distance for today ---
       const today = now.toISOString().split('T')[0]; // "YYYY-MM-DD"
       const distanceEntry = await Distance.findOne({ userId, date: today });
-      console.log(distanceEntry)
+      // console.log(distanceEntry)
       const totalDistance = distanceEntry?.totalDistance || 0;
 
       io.sockets.sockets.forEach((s) => {
@@ -395,10 +396,29 @@ socket.on('manual-disconnect', async () => {
 
 
 
+
+
 function notifyDashboardUpdate() {
   io.emit('dashboardUpdate');
   console.log('Emitted dashboardUpdate event');
 }
+
+
+// In Express server (CommonJS or ESM)
+app.get('/api/reverse-geocode', async (req, res) => {
+  const { lat, lon } = req.query;
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Geocoding failed' });
+  }
+});
+
+
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
