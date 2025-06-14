@@ -72,7 +72,7 @@ const LocationTracker = ({ token, socketRef }) => {
       const data = await response.json();
       return data.display_name || null;
     } catch (error) {
-      console.warn('⚠️ Frontend reverse geocode error:', error);
+      // console.warn('⚠️ Frontend reverse geocode error:', error);
       return null;
     }
   };
@@ -84,13 +84,13 @@ const LocationTracker = ({ token, socketRef }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (!res.ok || !res.headers.get('Content-Type')?.includes('application/json')) {
-        console.warn('⚠️ Backend reverse geocode did not return JSON or failed');
+        // console.warn('⚠️ Backend reverse geocode did not return JSON or failed');
         return null;
       }
       const data = await res.json();
       return data.display_name || null;
     } catch (err) {
-      console.warn('⚠️ Backend reverse geocode error:', err);
+      // console.warn('⚠️ Backend reverse geocode error:', err);
       return null;
     }
   };
@@ -116,16 +116,16 @@ const LocationTracker = ({ token, socketRef }) => {
           address,
         });
 
-        console.log(`📍 Location sent at tick ${tick}:`, {
-          latitude,
-          longitude,
-          address,
-          backendAddress,
-          frontendAddress,
-        });
+        // console.log(`📍 Location sent at tick ${tick}:`, {
+        //   latitude,
+        //   longitude,
+        //   address,
+        //   backendAddress,
+        //   frontendAddress,
+        // });
       },
       (error) => {
-        console.error('⚠️ Geolocation error:', error.message);
+        // console.error('⚠️ Geolocation error:', error.message);
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 10000 }
     );
