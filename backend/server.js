@@ -23,7 +23,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://employee-tracking-system-frontend.onrender.com', // Your deployed frontend
+  'https://empts.onrender.com', // Your deployed frontend
 ];
 
 app.use(cors({ 
