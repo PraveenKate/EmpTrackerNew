@@ -53,7 +53,7 @@ const UserLocation = ({ token }) => {
             );
             const data = await res.json();
             address = data.display_name || address;
-            console.log('📍 Address:', address);
+            // console.log('📍 Address:', address);
           } catch (err) {
             console.error('Reverse geocoding error:', err);
           }
