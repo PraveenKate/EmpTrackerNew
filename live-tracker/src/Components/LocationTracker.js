@@ -62,6 +62,8 @@ import { useEffect, useState } from 'react';
 const LocationTracker = ({ token, socketRef }) => {
   const [tick, setTick] = useState(0);
 
+  console.log('LocationTracker rendered, tick =', tick);
+
   useEffect(() => {
     if (!token || !socketRef.current || !navigator.geolocation) return;
 
@@ -86,6 +88,8 @@ const LocationTracker = ({ token, socketRef }) => {
             lng: longitude,
             address,
           });
+
+          console.log(`Location sent at tick ${tick}:`, { latitude, longitude, address });
         },
         (error) => {
           console.error('Geolocation error:', error.message);
