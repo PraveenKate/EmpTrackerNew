@@ -1,0 +1,41 @@
+.wrapper {
+  text-align: center;
+  background-color: #f0f4fa;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #1a237e;
+}
+
+.video {
+  border: 2px solid #90caf9;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.status {
+  font-size: 1rem;
+  color: #37474f;
+  margin-bottom: 10px;
+}
+
+.retryButton {
+  padding: 10px 16px;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.retryButton:hover {
+  background-color: #1565c0;
+}

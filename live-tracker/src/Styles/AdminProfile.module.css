@@ -1,0 +1,120 @@
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.message {
+  text-align: center;
+  margin-bottom: 16px;
+  color: #007b5e;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 12px;
+  font-weight: 500;
+  color: #555;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 4px;
+  font-size: 1rem;
+}
+
+input:disabled {
+  background-color: #e9ecef;
+}
+
+.editBtn, .saveBtn {
+  margin-top: 24px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.editBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+.saveBtn {
+  background-color: #28a745;
+  color: white;
+}
+
+.editBtn:hover {
+  background-color: #0069d9;
+}
+
+.saveBtn:hover {
+  background-color: #218838;
+}
+.profileImageContainer {
+  margin-bottom: 20px;
+  text-align: center;      /* This centers inline elements inside */
+  display: flex;
+  flex-direction: column;  /* Stack image and button vertically */
+  align-items: center;     /* Center horizontally */
+  gap: 8px;                /* Space between image and button */
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.noImagePlaceholder {
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  border: 2px dashed #ccc;
+  border-radius: 50%;
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+}
+
+.clearImageBtn {
+  padding: 5px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clearImageBtn:hover {
+  background-color: #c0392b;
+}
+
+.imageInput {
+  margin-top: 8px;
+  align-self: center; /* Center the input too */
+}

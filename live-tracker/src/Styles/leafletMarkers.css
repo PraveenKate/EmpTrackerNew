@@ -1,0 +1,76 @@
+.user-pin-marker {
+  position: relative;
+  width: 50px;
+  height: 70px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* The pin body: rounded top with pointed bottom */
+.user-pin-marker .pin-body {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  background: white; /* #007bff; blue background */
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+/* The small pointed tail below the circle */
+.user-pin-marker::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid #2c5282; /* blue tail */
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  z-index: 1;
+}
+
+.user-pin-marker .pin-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover effect */
+.user-pin-marker:hover .pin-body {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce {
+  animation: bounce 0.6s ease;
+}
+
+.leaflet-marker-icon {
+  position: relative !important;
+}
+
+
+.user-pin-marker.selected {
+  z-index: 999 !important;
+  transform: scale(1.15);
+}
